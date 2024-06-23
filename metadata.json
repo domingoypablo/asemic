@@ -1,8 +1,8 @@
 {
   "name": "Asemic Writing",
   "description": "An interactive asemic writing tool for mindfulness and meditation.",
-  "image": "ipfs://<CID>/asemic.jpg",
-  "animation_url": "ipfs://<CID>/index.html",
+  "image": "ipfs://QmP5PqqxTxDP4c7GRjcC93XjPDfkBYGp59WrwCx4qJq856",
+  "animation_url": "https://domingoypablo.github.io/asemic/index.html",
   "attributes": [
     {
       "trait_type": "Type",
