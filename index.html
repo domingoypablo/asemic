@@ -1,31 +1,93 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asemic Drawing</title>
+
+    <title>Interactive Art NFT</title>
+
     <style>
-        /* Add your styles here */
+
+        body { margin: 0; overflow: hidden; background: #fff; }
+
+        canvas { display: block; }
+
     </style>
+
 </head>
+
 <body>
-    <h1>Create Your Asemic Drawing</h1>
-    <canvas id="asemicCanvas" width="800" height="600"></canvas>
-    <button id="downloadButton">Download Drawing</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+
     <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const downloadButton = document.getElementById('downloadButton');
-        downloadButton.addEventListener('click', () => {
-            const canvas = document.getElementById('asemicCanvas'); // Ensure your canvas element has this ID
-            const link = document.createElement('a');
-            link.download = 'asemic_drawing.png';
-            link.href = canvas.toDataURL();
-            link.click();
-        });
-    });
+
+        function setup() {
+
+            createCanvas(windowWidth, windowHeight);
+
+            background(255);
+
+        }
+
+
+
+        function draw() {
+
+            // This space intentionally left blank for static behavior.
+
+        }
+
+
+
+        function mouseMoved() {
+
+            let numShapes = int(random(3, 8));
+
+            let radius = random(20, 80);
+
+            let x = mouseX;
+
+            let y = mouseY;
+
+
+
+            for (let i = 0; i < numShapes; i++) {
+
+                let angle = TWO_PI / numShapes * i;
+
+                let sx = x + cos(angle) * radius;
+
+                let sy = y + sin(angle) * radius;
+
+                let sw = random(1, 5);
+
+                strokeWeight(sw);
+
+                stroke(random(0, 100), random(0, 100), random(0, 100), 150);
+
+                line(x, y, sx, sy);
+
+            }
+
+        }
+
+
+
+        function windowResized() {
+
+            resizeCanvas(windowWidth, windowHeight);
+
+            background(255);
+
+        }
+
     </script>
-    <script>
-        // Your existing script for drawing on the canvas
-    </script>
+
 </body>
+
 </html>
