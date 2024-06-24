@@ -1,93 +1,52 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Interactive Art NFT</title>
-
-    <style>
-
-        body { margin: 0; overflow: hidden; background: #fff; }
-
-        canvas { display: block; }
-
-    </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tint Pen Asemic Writing</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
+  </style>
 </head>
-
 <body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script>
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      background(255);
+    }
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    function draw() {
+      // Nothing here to keep the patterns static unless the mouse is moved
+    }
 
-    <script>
+    function mouseMoved() {
+      let numShapes = int(random(3, 8));
+      let radius = random(20, 80);
+      let x = mouseX;
+      let y = mouseY;
 
-        function setup() {
+      for (let i = 0; i < numShapes; i++) {
+        let angle = TWO_PI / numShapes * i;
+        let sx = x + cos(angle) * radius;
+        let sy = y + sin(angle) * radius;
+        let sw = random(2, 5); // Thicker strokes to resemble a tint pen
+        strokeWeight(sw);
+        let gray = random(0, 50); // Darker grayscale for a tint pen effect
+        stroke(gray, random(50, 150)); // Adding some transparency for a more ink-like feel
+        noFill();
+        beginShape();
+        vertex(x, y);
+        bezierVertex(x + radius / 2, y + radius / 2, sx - radius / 2, sy - radius / 2, sx, sy);
+        endShape();
+      }
+    }
 
-            createCanvas(windowWidth, windowHeight);
-
-            background(255);
-
-        }
-
-
-
-        function draw() {
-
-            // This space intentionally left blank for static behavior.
-
-        }
-
-
-
-        function mouseMoved() {
-
-            let numShapes = int(random(3, 8));
-
-            let radius = random(20, 80);
-
-            let x = mouseX;
-
-            let y = mouseY;
-
-
-
-            for (let i = 0; i < numShapes; i++) {
-
-                let angle = TWO_PI / numShapes * i;
-
-                let sx = x + cos(angle) * radius;
-
-                let sy = y + sin(angle) * radius;
-
-                let sw = random(1, 5);
-
-                strokeWeight(sw);
-
-                stroke(random(0, 100), random(0, 100), random(0, 100), 150);
-
-                line(x, y, sx, sy);
-
-            }
-
-        }
-
-
-
-        function windowResized() {
-
-            resizeCanvas(windowWidth, windowHeight);
-
-            background(255);
-
-        }
-
-    </script>
-
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+      background(255);
+    }
+  </script>
 </body>
-
 </html>
