@@ -3,50 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asemic Writing Tool</title>
+    <title>Asemic Drawing</title>
     <style>
-        body { margin: 0; overflow: hidden; }
-        canvas { display: block; }
+        /* Add your styles here */
     </style>
 </head>
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <h1>Create Your Asemic Drawing</h1>
+    <canvas id="asemicCanvas" width="800" height="600"></canvas>
+    <button id="downloadButton">Download Drawing</button>
     <script>
-        function setup() {
-            createCanvas(windowWidth, windowHeight);
-            background(255);
-        }
-
-        function draw() {
-            // Nothing here to keep the patterns static unless the mouse is moved
-        }
-
-        function mouseMoved() {
-            let numShapes = int(random(3, 8));
-            let radius = random(20, 80);
-            let x = mouseX;
-            let y = mouseY;
-
-            for (let i = 0; i < numShapes; i++) {
-                let angle = TWO_PI / numShapes * i;
-                let sx = x + cos(angle) * radius;
-                let sy = y + sin(angle) * radius;
-                let sw = random(2, 5); // Thicker strokes to resemble a tint pen
-                strokeWeight(sw);
-                let gray = random(0, 50); // Darker grayscale for a tint pen effect
-                stroke(gray, random(50, 150)); // Adding some transparency for a more ink-like feel
-                noFill();
-                beginShape();
-                vertex(x, y);
-                bezierVertex(x + radius / 2, y + radius / 2, sx - radius / 2, sy - radius / 2, sx, sy);
-                endShape();
-            }
-        }
-
-        function windowResized() {
-            resizeCanvas(windowWidth, windowHeight);
-            background(255);
-        }
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const downloadButton = document.getElementById('downloadButton');
+        downloadButton.addEventListener('click', () => {
+            const canvas = document.getElementById('asemicCanvas'); // Ensure your canvas element has this ID
+            const link = document.createElement('a');
+            link.download = 'asemic_drawing.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+    });
+    </script>
+    <script>
+        // Your existing script for drawing on the canvas
     </script>
 </body>
 </html>
